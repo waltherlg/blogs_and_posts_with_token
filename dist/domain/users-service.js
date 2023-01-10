@@ -37,17 +37,6 @@ const mongodb_1 = require("mongodb");
 const users_repository_1 = require("../repositories/users-repository");
 const bcrypt = __importStar(require("bcrypt"));
 exports.usersService = {
-    // async createUser(login: string, password: string, email: string): Promise<userTypeOutput> {
-    //     const newUser: userType = {
-    //         "_id": new ObjectId(),
-    //         "login": login,
-    //         "password": password,
-    //         "email": email,
-    //         "createdAt": new Date().toISOString()
-    //     }
-    //     const createdUser = await usersRepository.createUser(newUser)
-    //     return createdUser
-    // },
     createUser(login, password, email) {
         return __awaiter(this, void 0, void 0, function* () {
             const passwordSalt = yield bcrypt.genSalt(10);
