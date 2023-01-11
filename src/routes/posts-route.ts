@@ -65,7 +65,7 @@ postsRouter.get('/blogid/:blogId', async (req: RequestWithParams<URIParamsGetPos
     }
 })
 
-// POST add blogs
+// POST add post
 postsRouter.post('/',
     basicAuthMiddleware,
     titleValidation,
@@ -77,6 +77,11 @@ postsRouter.post('/',
         const newPost = await postsService.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId)
         res.status(201).send(newPost)
     })
+
+// POST add comment by post id
+
+postsRouter.post('/',
+    )
 
 // PUT update post
 postsRouter.put('/:id',

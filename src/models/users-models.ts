@@ -9,10 +9,6 @@ export type userInputModel = {
     email: string,
 }
 
-export type userOutputModel = {
-
-}
-
 export type userAuthModel = {
     loginOrEmail: string,
     password: string

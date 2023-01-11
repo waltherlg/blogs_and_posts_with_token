@@ -34,7 +34,12 @@ export const usersService = {
         if (user.passwordHash !== passwordHash){
             return false
         }
-        return true
+        return user
+    },
+
+    async findUserById(id: string): Promise<userType> {
+        return await usersRepository.findUserById(id)
+
     },
 
     async deleteUser(id: string): Promise<boolean> {

@@ -2,7 +2,7 @@ import {Request, Response, Router} from "express";
 import {usersService} from "../domain/users-service";
 import {RequestWithBody} from "../models/types";
 import {userAuthModel} from "../models/users-models";
-import {jwtService} from "../application/jvt-service";
+import {jwtService} from "../application/jwt-service";
 
 export const authRouter = Router({})
 
