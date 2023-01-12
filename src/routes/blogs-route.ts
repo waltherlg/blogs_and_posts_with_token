@@ -77,7 +77,11 @@ blogsRouter.post('/:blogId/posts',
             res.sendStatus(404)
         }
         else {
-            const newPost = await postsService.createPostByBlogId(req.body.title, req.body.shortDescription, req.body.content, req.params.blogId.toString())
+            const newPost = await postsService.createPostByBlogId(
+                req.body.title,
+                req.body.shortDescription,
+                req.body.content,
+                req.params.blogId.toString())
             res.status(201).send(newPost)
         }
 

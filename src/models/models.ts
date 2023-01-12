@@ -28,6 +28,10 @@ export type URIParamsGetPostByBlogIdModel = {
     blogId: string
 }
 
+export type URIParamsCommentModel = {
+    postId: string
+}
+
 export type createPostModel = {
     title: string,
     shortDescription: string,
@@ -52,6 +56,10 @@ export type updateBlogModel = {
     name: string,
     description: string,
     websiteUrl: string,
+}
+
+export type createCommentModel = {
+    content: string
 }
 
 export type requestBlogsQueryModel = {
@@ -86,6 +94,7 @@ export type requestPostsByBlogsIdQueryModel = {
     pageSize: string,
 }
 
+
 export type paginationBlogOutputModel = {
     pagesCount: number,
     page: number,
@@ -109,3 +118,4 @@ export type paginationUserOutputModel = {
     totalCount: number,
     items: any
 }
+

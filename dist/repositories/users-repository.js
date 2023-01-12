@@ -43,6 +43,19 @@ exports.usersRepository = {
             return true;
         });
     },
+    findUserById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!mongodb_1.ObjectId.isValid(id)) {
+                return null;
+            }
+            let _id = new mongodb_1.ObjectId(id);
+            const user = yield exports.usersCollection.findOne({ _id: _id });
+            if (!user) {
+                return null;
+            }
+            return user;
+        });
+    },
     findUserByLoginOrEmail(loginOrEmail) {
         return __awaiter(this, void 0, void 0, function* () {
             const user = yield exports.usersCollection.findOne({ $or: [{ email: loginOrEmail }, { login: loginOrEmail }] });

@@ -3,7 +3,7 @@ import {postsService} from "../domain/posts-service";
 import {blogsService} from "../domain/blogs-service";
 import {usersRepository} from "../repositories/users-repository";
 import {usersService} from "../domain/users-service";
-import {authMiddlewere} from "../middlewares/basic-auth.middleware";
+import {authMiddleware} from "../middlewares/basic-auth.middleware";
 
 export const testingRouter = Router({})
 
@@ -22,9 +22,3 @@ testingRouter.delete('/',
 
     })
 
-testingRouter.get('/getBlogs',
-    authMiddlewere,
-    async (req: Request, res: Response) => {
-
-
-    })

@@ -38,8 +38,8 @@ export type blogType = {
 export type userType = {
     _id: string | ObjectId
     login: string
-    passwordHash: string,
-    passwordSalt: string,
+    passwordHash: string
+    passwordSalt: string
     email: string
     createdAt: string
 }
@@ -50,6 +50,21 @@ export type userTypeOutput = {
     createdAt: string
 }
 
+export type commentType = {
+    _id:	string | ObjectId,
+    content:	string
+    userId:	string
+    userLogin:	string
+    createdAt:	string
+}
+
+export type commentTypeOutput = {
+    id:	string
+    content:	string
+    userId:	string
+    userLogin:	string
+    createdAt:	string
+}
 
 export type RequestWithBody<B> = Request<{},{}, B>
 export type RequestWithQuery<Q> = Request<{},{},{}, Q>

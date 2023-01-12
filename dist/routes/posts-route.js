@@ -54,11 +54,24 @@ exports.postsRouter.get('/blogid/:blogId', (req, res) => __awaiter(void 0, void 
         res.sendStatus(404);
     }
 }));
-// POST add blogs
+// POST add post
 exports.postsRouter.post('/', basic_auth_middleware_1.basicAuthMiddleware, input_validation_middleware_2.titleValidation, input_validation_middleware_3.shortDescriptionValidation, input_validation_middleware_4.contentValidation, input_validation_middleware_5.existBlogIdValidation, input_validation_middleware_1.inputValidationMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newPost = yield posts_service_1.postsService.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId);
     res.status(201).send(newPost);
 }));
+// POST add comment by post id
+// postsRouter.post('/:postId/comments',
+//     basicAuthMiddleware,
+//     authMiddleware,
+//     inputValidationMiddleware,
+//     //async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
+//     async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
+//     const newComment = await commentService.createComment(
+//         req.params.postId,
+//         req.body.content,
+//         req.user?._id,
+//         req.user?.login)
+//     })
 // PUT update post
 exports.postsRouter.put('/:id', basic_auth_middleware_1.basicAuthMiddleware, input_validation_middleware_5.existBlogIdValidation, input_validation_middleware_3.shortDescriptionValidation, input_validation_middleware_2.titleValidation, input_validation_middleware_4.contentValidation, input_validation_middleware_1.inputValidationMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const updatePost = yield posts_service_1.postsService.updatePost(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId);

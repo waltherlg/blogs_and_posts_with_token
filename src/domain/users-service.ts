@@ -37,7 +37,7 @@ export const usersService = {
         return user
     },
 
-    async findUserById(id: string): Promise<userType> {
+    async findUserById(id: string): Promise<userType | null> {
         return await usersRepository.findUserById(id)
 
     },

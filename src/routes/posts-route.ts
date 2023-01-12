@@ -5,6 +5,8 @@ import {body} from "express-validator";
 
 import {postsService} from "../domain/posts-service";
 import {blogsService} from "../domain/blogs-service";
+import {commentService} from "../domain/comment-service";
+
 import {
     RequestWithBody,
     RequestWithParams,
@@ -13,9 +15,10 @@ import {
     RequestWithQuery
 } from "../models/types";
 import {
+    createCommentModel,
     createPostModel,
     requestPostsQueryModel,
-    updatePostModel,
+    updatePostModel, URIParamsCommentModel,
     URIParamsGetPostByBlogIdModel,
     URIParamsPostModel
 } from "../models/models";
@@ -23,7 +26,7 @@ import {
 export const postsRouter = Router({})
 
 import {inputValidationMiddleware} from "../middlewares/input-validation-middleware/input-validation-middleware";
-import {basicAuthMiddleware} from "../middlewares/basic-auth.middleware";
+import {authMiddleware, basicAuthMiddleware} from "../middlewares/basic-auth.middleware";
 import {titleValidation} from "../middlewares/input-validation-middleware/input-validation-middleware";
 import {shortDescriptionValidation} from "../middlewares/input-validation-middleware/input-validation-middleware";
 import {contentValidation} from "../middlewares/input-validation-middleware/input-validation-middleware";
@@ -74,14 +77,28 @@ postsRouter.post('/',
     existBlogIdValidation,
     inputValidationMiddleware,
     async (req: RequestWithBody<createPostModel>, res: Response) => {
-        const newPost = await postsService.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.blogId)
+        const newPost = await postsService.createPost(
+            req.body.title,
+            req.body.shortDescription,
+            req.body.content,
+            req.body.blogId)
         res.status(201).send(newPost)
     })
 
 // POST add comment by post id
 
-postsRouter.post('/',
-    )
+// postsRouter.post('/:postId/comments',
+//     basicAuthMiddleware,
+//     authMiddleware,
+//     inputValidationMiddleware,
+//     //async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
+//     async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
+//     const newComment = await commentService.createComment(
+//         req.params.postId,
+//         req.body.content,
+//         req.user?._id,
+//         req.user?.login)
+//     })
 
 // PUT update post
 postsRouter.put('/:id',
@@ -92,7 +109,12 @@ postsRouter.put('/:id',
     contentValidation,
     inputValidationMiddleware,
     async (req: RequestWithParamsAndBody<URIParamsPostModel, updatePostModel>, res: Response) => {
-        const updatePost = await postsService.updatePost(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId)
+        const updatePost = await postsService.updatePost(
+            req.params.id,
+            req.body.title,
+            req.body.shortDescription,
+            req.body.content,
+            req.body.blogId)
         if (updatePost) {
             res.sendStatus(204)
         } else {

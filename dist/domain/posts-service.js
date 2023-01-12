@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postsService = void 0;
 const posts_repository_1 = require("../repositories/posts-repository");
 const mongodb_1 = require("mongodb");
+const blogs_service_1 = require("./blogs-service");
 exports.postsService = {
     getPostByID(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -23,20 +24,20 @@ exports.postsService = {
             return yield posts_repository_1.postsRepository.getPostByBlogsID(blogId);
         });
     },
-    getAllPosts() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield posts_repository_1.postsRepository.getAllPosts();
-        });
-    },
+    // async getAllPosts(): Promise<postTypeOutput[]> {
+    //     return await postsRepository.getAllPosts()
+    // },
     createPost(title, shortDescription, content, blogId) {
         return __awaiter(this, void 0, void 0, function* () {
+            let foundBlog = yield blogs_service_1.blogsService.getBlogByID(blogId);
+            const blogName = foundBlog.name;
             const newPost = {
                 "_id": new mongodb_1.ObjectId(),
                 "title": title,
                 "shortDescription": shortDescription,
                 "content": content,
                 "blogId": blogId,
-                "blogName": title,
+                "blogName": blogName,
                 "createdAt": new Date().toISOString()
             };
             const createdPost = yield posts_repository_1.postsRepository.createPost(newPost);
@@ -45,13 +46,15 @@ exports.postsService = {
     },
     createPostByBlogId(title, shortDescription, content, blogId) {
         return __awaiter(this, void 0, void 0, function* () {
+            let foundBlog = yield blogs_service_1.blogsService.getBlogByID(blogId);
+            const blogName = foundBlog.name;
             const newPost = {
                 "_id": new mongodb_1.ObjectId(),
                 "title": title,
                 "shortDescription": shortDescription,
                 "content": content,
                 "blogId": blogId,
-                "blogName": title,
+                "blogName": blogName,
                 "createdAt": new Date().toISOString()
             };
             const createdPost = yield posts_repository_1.postsRepository.createPost(newPost);

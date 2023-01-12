@@ -38,7 +38,7 @@ export const usersRepository = {
             return null
         }
         let _id = new ObjectId(id)
-        const user: userType | null = await usersCollection.findOne({_id: id})
+        const user: userType | null = await usersCollection.findOne({_id: _id})
         if (!user){
             return null
         }
