@@ -87,18 +87,18 @@ postsRouter.post('/',
 
 // POST add comment by post id
 
-// postsRouter.post('/:postId/comments',
-//     basicAuthMiddleware,
-//     authMiddleware,
-//     inputValidationMiddleware,
-//     //async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
-//     async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
-//     const newComment = await commentService.createComment(
-//         req.params.postId,
-//         req.body.content,
-//         req.user?._id,
-//         req.user?.login)
-//     })
+postsRouter.post('/:postId/comments',
+    //basicAuthMiddleware,
+    authMiddleware,
+    inputValidationMiddleware,
+    //async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
+    async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
+    const newComment = await commentService.createComment(
+        req.params.postId,
+        req.body.content,
+        req.headers.authorization!)
+        res.status(201).send(newComment)
+    })
 
 // PUT update post
 postsRouter.put('/:id',

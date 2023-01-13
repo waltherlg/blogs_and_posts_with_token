@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postsRouter = void 0;
 const express_1 = require("express");
 const posts_service_1 = require("../domain/posts-service");
+const comment_service_1 = require("../domain/comment-service");
 exports.postsRouter = (0, express_1.Router)({});
 const input_validation_middleware_1 = require("../middlewares/input-validation-middleware/input-validation-middleware");
 const basic_auth_middleware_1 = require("../middlewares/basic-auth.middleware");
@@ -60,18 +61,14 @@ exports.postsRouter.post('/', basic_auth_middleware_1.basicAuthMiddleware, input
     res.status(201).send(newPost);
 }));
 // POST add comment by post id
-// postsRouter.post('/:postId/comments',
-//     basicAuthMiddleware,
-//     authMiddleware,
-//     inputValidationMiddleware,
-//     //async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
-//     async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
-//     const newComment = await commentService.createComment(
-//         req.params.postId,
-//         req.body.content,
-//         req.user?._id,
-//         req.user?.login)
-//     })
+exports.postsRouter.post('/:postId/comments', 
+//basicAuthMiddleware,
+basic_auth_middleware_1.authMiddleware, input_validation_middleware_1.inputValidationMiddleware, 
+//async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
+(req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const newComment = yield comment_service_1.commentService.createComment(req.params.postId, req.body.content, req.headers.authorization);
+    res.status(201).send(newComment);
+}));
 // PUT update post
 exports.postsRouter.put('/:id', basic_auth_middleware_1.basicAuthMiddleware, input_validation_middleware_5.existBlogIdValidation, input_validation_middleware_3.shortDescriptionValidation, input_validation_middleware_2.titleValidation, input_validation_middleware_4.contentValidation, input_validation_middleware_1.inputValidationMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const updatePost = yield posts_service_1.postsService.updatePost(req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.blogId);
