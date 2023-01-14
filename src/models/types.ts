@@ -20,6 +20,8 @@ export type postType = {
     createdAt: string
 }
 
+// type | interface | class
+
 export type blogTypeOutput = {
     id: string,
     name: string,
@@ -52,6 +54,8 @@ export type userTypeOutput = {
 
 export type commentType = {
     _id:	string | ObjectId,
+    "parentType": string,
+    "parentId": string,
     content:	string
     userId:	string
     userLogin:	string

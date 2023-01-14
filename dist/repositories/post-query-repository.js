@@ -11,19 +11,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postsQueryRepo = void 0;
 const posts_repository_1 = require("./posts-repository");
-function sort(sortDirection) {
-    return (sortDirection === 'desc') ? -1 : 1;
-}
-function skipped(pageNumber, pageSize) {
-    return (+pageNumber - 1) * (+pageSize);
-}
+const functions_1 = require("../application/functions");
+const functions_2 = require("../application/functions");
 exports.postsQueryRepo = {
     getAllPosts(sortBy, sortDirection, pageNumber, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             let postsCount = yield posts_repository_1.postCollection.countDocuments({});
             let posts = yield posts_repository_1.postCollection.find({})
-                .sort({ [sortBy]: sort(sortDirection) })
-                .skip(skipped(pageNumber, pageSize))
+                .sort({ [sortBy]: (0, functions_1.sort)(sortDirection) })
+                .skip((0, functions_2.skipped)(pageNumber, pageSize))
                 .limit(+pageSize)
                 .toArray();
             let outPosts = posts.map((posts) => {
@@ -51,9 +47,9 @@ exports.postsQueryRepo = {
     getAllPostsByBlogsID(blogId, sortBy, sortDirection, pageNumber, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             let posts = yield posts_repository_1.postCollection.find({ "blogId": blogId })
-                .skip(skipped(pageNumber, pageSize))
+                .skip((0, functions_2.skipped)(pageNumber, pageSize))
                 .limit(+pageSize)
-                .sort({ [sortBy]: sort(sortDirection) })
+                .sort({ [sortBy]: (0, functions_1.sort)(sortDirection) })
                 .toArray();
             let outPosts = posts.map((posts) => {
                 return {

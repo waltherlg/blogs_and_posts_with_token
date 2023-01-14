@@ -80,8 +80,8 @@ exports.blogsRouter.get('/:id/posts', (req, res) => __awaiter(void 0, void 0, vo
                 res.status(200).send(foundPosts);
             }
         }
-        catch (e) {
-            res.status(500).send(e);
+        catch (error) {
+            res.status(500).send(error);
         }
     }
 }));

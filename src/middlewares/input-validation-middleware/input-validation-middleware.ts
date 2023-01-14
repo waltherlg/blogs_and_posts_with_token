@@ -91,3 +91,8 @@ export const existParamBlogIdValidation = param('blogId')
         if (!isBlogIdExist) throw new Error
         return true
     }).withMessage({"message": "blogId not exist", "field": "blogId" })
+
+export const commentContentValodation = body('content')
+    .exists().bail().withMessage({message: "content not exist", field: "content" })
+    .trim().bail().withMessage({message: "content is not string", field: "content" })
+    .isLength({min: 20, max: 300}).bail().withMessage({message: "wrong content length", field: "content" })

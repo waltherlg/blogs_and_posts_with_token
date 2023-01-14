@@ -7,6 +7,7 @@ import {usersRouter} from "./routes/users-route";
 import {testingRouter} from "./routes/testing-route";
 import {runDb} from "./repositories/db";
 import {authRouter} from "./routes/auth-route";
+import {commentsRouter} from "./routes/comments-route";
 
 const bodyParser = require('body-parser');
 const fs = require("fs");
@@ -23,6 +24,7 @@ app.use('/blogs', blogsRouter)
 app.use('/posts', postsRouter)
 app.use('/users', usersRouter)
 app.use('/auth', authRouter)
+app.use('/comments', commentsRouter)
 
 
 const startApp = async () => {

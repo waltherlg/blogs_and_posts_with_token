@@ -4,8 +4,29 @@ export type URIParamsPostModel = {
     /**
      * id of existing post
      */
-    id: string
+    postId: string
 }
+
+// class  Человек {
+//     рука: строка
+//
+//     печататьрукой(){}
+// }
+//
+// class Левша extends  Человек {
+//     печататьрукой() {
+//         super.печататьрукой();
+//         печатать.леовой рукой
+//     }
+// }
+//
+// class првша extends Человек{
+//     печататьрукой() {
+//         super.печататьрукой();
+//         печатать правой рукой
+//     }
+// }
+
 
 export type URIParamsBlogModel = {
     /**
@@ -88,6 +109,13 @@ export type requestPostsQueryModel = {
 }
 
 export type requestPostsByBlogsIdQueryModel = {
+    sortBy: string,
+    sortDirection: string,
+    pageNumber: string,
+    pageSize: string,
+}
+
+export type requestCommentsByPostIdQueryModel = {
     sortBy: string,
     sortDirection: string,
     pageNumber: string,

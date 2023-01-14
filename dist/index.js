@@ -19,6 +19,7 @@ const users_route_1 = require("./routes/users-route");
 const testing_route_1 = require("./routes/testing-route");
 const db_1 = require("./repositories/db");
 const auth_route_1 = require("./routes/auth-route");
+const comments_route_1 = require("./routes/comments-route");
 const bodyParser = require('body-parser');
 const fs = require("fs");
 var path = require('path');
@@ -30,6 +31,7 @@ app.use('/blogs', blogs_route_1.blogsRouter);
 app.use('/posts', posts_route_1.postsRouter);
 app.use('/users', users_route_1.usersRouter);
 app.use('/auth', auth_route_1.authRouter);
+app.use('/comments', comments_route_1.commentsRouter);
 const startApp = () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, db_1.runDb)();
     app.listen(port, () => {

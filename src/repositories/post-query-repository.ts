@@ -2,14 +2,8 @@ import {postCollection} from "./posts-repository";
 import {postType} from "../models/types";
 import {blogCollection} from "./blogs-repository";
 import {paginationBlogOutputModel, paginationPostOutputModel} from "../models/models";
-
-function sort(sortDirection: string){
-    return (sortDirection === 'desc') ? -1 : 1;
-}
-
-function skipped(pageNumber: string, pageSize: string): number {
-    return (+pageNumber - 1) * (+pageSize);
-}
+import {sort} from "../application/functions";
+import {skipped} from "../application/functions";
 
 export const postsQueryRepo = {
 

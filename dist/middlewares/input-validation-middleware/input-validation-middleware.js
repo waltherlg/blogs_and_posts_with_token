@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.existParamBlogIdValidation = exports.existBlogIdValidation = exports.contentValidation = exports.shortDescriptionValidation = exports.titleValidation = exports.websiteUrlValidation = exports.descriptionValidation = exports.nameValidation = exports.emailValidation = exports.passwordValidation = exports.loginValidation = exports.inputValidationMiddleware = void 0;
+exports.commentContentValodation = exports.existParamBlogIdValidation = exports.existBlogIdValidation = exports.contentValidation = exports.shortDescriptionValidation = exports.titleValidation = exports.websiteUrlValidation = exports.descriptionValidation = exports.nameValidation = exports.emailValidation = exports.passwordValidation = exports.loginValidation = exports.inputValidationMiddleware = void 0;
 const express_validator_1 = require("express-validator");
 const express_validator_2 = require("express-validator");
 const blogs_service_1 = require("../../domain/blogs-service");
@@ -89,3 +89,7 @@ exports.existParamBlogIdValidation = (0, express_validator_2.param)('blogId')
         throw new Error;
     return true;
 })).withMessage({ "message": "blogId not exist", "field": "blogId" });
+exports.commentContentValodation = (0, express_validator_1.body)('content')
+    .exists().bail().withMessage({ message: "content not exist", field: "content" })
+    .trim().bail().withMessage({ message: "content is not string", field: "content" })
+    .isLength({ min: 20, max: 300 }).bail().withMessage({ message: "wrong content length", field: "content" });

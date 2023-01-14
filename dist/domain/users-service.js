@@ -71,9 +71,9 @@ exports.usersService = {
             return user;
         });
     },
-    findUserById(id) {
+    getUserById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield users_repository_1.usersRepository.findUserById(id);
+            return yield users_repository_1.usersRepository.getUserById(id);
         });
     },
     deleteUser(id) {

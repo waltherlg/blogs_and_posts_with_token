@@ -43,7 +43,7 @@ exports.usersRepository = {
             return true;
         });
     },
-    findUserById(id) {
+    getUserById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!mongodb_1.ObjectId.isValid(id)) {
                 return null;

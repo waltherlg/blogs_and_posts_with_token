@@ -33,7 +33,7 @@ export const usersRepository = {
         return true
     },
 
-    async findUserById(id: string): Promise<userType | null> {
+    async getUserById(id: string): Promise<userType | null> {
         if (!ObjectId.isValid(id)){
             return null
         }

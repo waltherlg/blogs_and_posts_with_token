@@ -116,8 +116,8 @@ blogsRouter.get('/:id/posts', async (req: RequestWithParamsAndQuery<URIParamsBlo
                 res.status(200).send(foundPosts)
             }
         }
-        catch (e){
-            res.status(500).send(e)
+        catch (error){
+            res.status(500).send(error)
         }
     }
 
