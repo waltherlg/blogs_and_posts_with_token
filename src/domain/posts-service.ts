@@ -15,10 +15,6 @@ export const postsService = {
         return await postsRepository.getPostByBlogsID(blogId)
     },
 
-    // async getAllPosts(): Promise<postTypeOutput[]> {
-    //     return await postsRepository.getAllPosts()
-    // },
-
     async createPost(
         title: string,
         shortDescription: string,

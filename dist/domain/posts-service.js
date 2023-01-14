@@ -24,9 +24,6 @@ exports.postsService = {
             return yield posts_repository_1.postsRepository.getPostByBlogsID(blogId);
         });
     },
-    // async getAllPosts(): Promise<postTypeOutput[]> {
-    //     return await postsRepository.getAllPosts()
-    // },
     createPost(title, shortDescription, content, blogId) {
         return __awaiter(this, void 0, void 0, function* () {
             let foundBlog = yield blogs_service_1.blogsService.getBlogByID(blogId);

@@ -107,7 +107,7 @@ postsRouter.get('/:postId/comments',
     async (req: RequestWithParamsAndQuery<URIParamsPostModel, requestCommentsByPostIdQueryModel>, res: Response) => {
         const foundPost = await postsService.getPostByID(req.params.postId.toString())
         if (!foundPost) {
-            res.status(404)
+            res.sendStatus(404)
         } else {
             try {
                 let postId = req.params.postId.toString()

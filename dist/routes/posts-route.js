@@ -70,7 +70,7 @@ exports.postsRouter.post('/:postId/comments', basic_auth_middleware_1.authMiddle
 exports.postsRouter.get('/:postId/comments', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const foundPost = yield posts_service_1.postsService.getPostByID(req.params.postId.toString());
     if (!foundPost) {
-        res.status(404);
+        res.sendStatus(404);
     }
     else {
         try {
