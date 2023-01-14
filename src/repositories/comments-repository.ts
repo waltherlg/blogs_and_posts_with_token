@@ -11,8 +11,6 @@ export const commentsRepository = {
         const result = await commentsCollection.insertOne(newComment)
         let createdComment = {
             id: newComment._id.toString(),
-            parentType: newComment.parentType,
-            parentId: newComment.parentId,
             content: newComment.content,
             userId: newComment.userId,
             userLogin: newComment.userLogin,
