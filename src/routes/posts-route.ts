@@ -93,6 +93,10 @@ postsRouter.post('/:postId/comments',
     commentContentValodation,
     inputValidationMiddleware,
     async (req: RequestWithParamsAndBody<URIParamsCommentModel, createCommentModel>, res: Response) => {
+        let foundPost = await postsService.getPostByID(req.params.postId.toString())
+        if (!foundPost){
+            res.sendStatus(404)
+        }
         const newComment = await commentService.createComment(
             req.params.postId,
             req.body.content,

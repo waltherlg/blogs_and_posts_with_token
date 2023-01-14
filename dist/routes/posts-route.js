@@ -63,6 +63,10 @@ exports.postsRouter.post('/', basic_auth_middleware_1.basicAuthMiddleware, input
 }));
 // POST add comment by post id
 exports.postsRouter.post('/:postId/comments', basic_auth_middleware_1.authMiddleware, input_validation_middleware_1.commentContentValodation, input_validation_middleware_1.inputValidationMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let foundPost = yield posts_service_1.postsService.getPostByID(req.params.postId.toString());
+    if (!foundPost) {
+        res.sendStatus(404);
+    }
     const newComment = yield comment_service_1.commentService.createComment(req.params.postId, req.body.content, req.user._id.toString(), req.user.login);
     res.status(201).send(newComment);
 }));

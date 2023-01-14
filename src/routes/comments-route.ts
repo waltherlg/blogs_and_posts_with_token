@@ -3,7 +3,7 @@ import {commentsRepository} from "../repositories/comments-repository";
 import {commentService} from "../domain/comment-service";
 import {authMiddleware} from "../middlewares/basic-auth.middleware";
 import {usersService} from "../domain/users-service";
-import {isUserOwnerofComments} from "../middlewares/other-midlevares";
+import {isUserOwnerOfComments} from "../middlewares/other-midlevares";
 import {commentContentValodation} from "../middlewares/input-validation-middleware/input-validation-middleware";
 import {inputValidationMiddleware} from "../middlewares/input-validation-middleware/input-validation-middleware";
 
@@ -25,7 +25,7 @@ commentsRouter.get('/:id',
 
 commentsRouter.delete('/:commentId',
     authMiddleware,
-    isUserOwnerofComments,
+    isUserOwnerOfComments,
     async (req: Request, res: Response) => {
         let isDeleted = await commentService.deleteComment(req.params.commentId.toString())
         if (isDeleted) {
@@ -39,7 +39,7 @@ commentsRouter.delete('/:commentId',
 
 commentsRouter.put('/:commentId',
     authMiddleware,
-    isUserOwnerofComments,
+    isUserOwnerOfComments,
     commentContentValodation,
     inputValidationMiddleware,
     async (req: Request, res: Response) => {

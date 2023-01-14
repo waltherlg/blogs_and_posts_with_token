@@ -3,7 +3,7 @@ import {validationResult} from "express-validator";
 import {commentService} from "../domain/comment-service";
 
 
-export const isUserOwnerofComments = async (req: Request, res: Response, next: NextFunction) => {
+export const isUserOwnerOfComments = async (req: Request, res: Response, next: NextFunction) => {
     const user = req.user!.login
     const comment = await commentService.getCommentById(req.params.commentId)
     if (!comment) {
