@@ -59,17 +59,11 @@ blogsRouter.post('/',
     websiteUrlValidation,
     inputValidationMiddleware,
     async (req: RequestWithBody<createBlogModel>, res: Response) => {
-    try{
         const newBlog = await blogsService.createBlog(
             req.body.name,
             req.body.description,
             req.body.websiteUrl)
         res.status(201).send(newBlog)
-    }
-    catch (e){
-        res.status(400).send("error")
-    }
-
     })
 
 // POST create post for specific blog

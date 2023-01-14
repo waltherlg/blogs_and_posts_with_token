@@ -96,6 +96,7 @@ postsRouter.post('/:postId/comments',
         let foundPost = await postsService.getPostByID(req.params.postId.toString())
         if (!foundPost){
             res.sendStatus(404)
+            return
         }
         const newComment = await commentService.createComment(
             req.params.postId,
