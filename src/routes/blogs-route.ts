@@ -45,8 +45,8 @@ blogsRouter.get('/', async (req: RequestWithQuery<requestBlogsQueryModel>, res: 
         const allBlogs = await blogsQueryRepo.getAllBlogs(searchNameTerm, sortBy, sortDirection, pageNumber, pageSize)
         res.status(200).send(allBlogs);
     }
-    catch (e){
-        res.status(500).send(e)
+    catch (error){
+        res.status(500).send(error)
     }
 
 })
@@ -59,8 +59,17 @@ blogsRouter.post('/',
     websiteUrlValidation,
     inputValidationMiddleware,
     async (req: RequestWithBody<createBlogModel>, res: Response) => {
-        const newBlog = await blogsService.createBlog(req.body.name, req.body.description, req.body.websiteUrl)
+    try{
+        const newBlog = await blogsService.createBlog(
+            req.body.name,
+            req.body.description,
+            req.body.websiteUrl)
         res.status(201).send(newBlog)
+    }
+    catch (e){
+        res.status(400).send("error")
+    }
+
     })
 
 // POST create post for specific blog

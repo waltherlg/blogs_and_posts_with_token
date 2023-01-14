@@ -20,6 +20,7 @@ exports.testingRouter.delete('/', (req, res) => __awaiter(void 0, void 0, void 0
     const isPostsDeleted = yield posts_service_1.postsService.deleteAllPosts();
     const isBlogsDeleted = yield blogs_service_1.blogsService.deleteAllBlogs();
     const isUsersDeleted = yield users_service_1.usersService.deleteAllUsers();
+    //const isCommentsDeleted = await commentService.
     if (isPostsDeleted && isBlogsDeleted && isUsersDeleted) {
         return res.sendStatus(204);
     }
