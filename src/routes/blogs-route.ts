@@ -1,5 +1,4 @@
 import {Request, Response, Router} from "express";
-import {body} from "express-validator";
 import {blogsService} from "../domain/blogs-service";
 import {postsService} from "../domain/posts-service";
 
@@ -14,7 +13,7 @@ import {
 export const blogsRouter = Router({})
 
 import {
-    contentValidation, existBlogIdValidation, existParamBlogIdValidation,
+    contentValidation,
     nameValidation,
     shortDescriptionValidation,
     titleValidation
@@ -25,7 +24,7 @@ import {descriptionValidation} from "../middlewares/input-validation-middleware/
 import {websiteUrlValidation} from "../middlewares/input-validation-middleware/input-validation-middleware";
 import {
     createBlogModel, createPostModel,
-    requestBlogsQueryModel, requestPostsByBlogsIdQueryModel, requestPostsQueryModel,
+    requestBlogsQueryModel, requestPostsByBlogsIdQueryModel,
     updateBlogModel,
     URIParamsBlogModel,
     URIParamsIDBlogModel
@@ -151,7 +150,6 @@ blogsRouter.put('/:id',
     async (req: RequestWithParamsAndBody<URIParamsBlogModel, updateBlogModel>, res) => {
     const updateBlog = await blogsService.updateBlog(req.params.id, req.body.name, req.body.description, req.body.websiteUrl)
         if (updateBlog){
-            const blog = blogsService.getBlogByID(req.params.id)
             res.sendStatus(204)
         }
         else {

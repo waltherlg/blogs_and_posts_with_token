@@ -66,6 +66,7 @@ exports.postsRouter.post('/:postId/comments', basic_auth_middleware_1.authMiddle
     let foundPost = yield posts_service_1.postsService.getPostByID(req.params.postId.toString());
     if (!foundPost) {
         res.sendStatus(404);
+        return;
     }
     const newComment = yield comment_service_1.commentService.createComment(req.params.postId, req.body.content, req.user._id.toString(), req.user.login);
     res.status(201).send(newComment);

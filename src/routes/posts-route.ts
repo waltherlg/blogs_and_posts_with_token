@@ -1,9 +1,6 @@
 import {Request, Response, Router} from "express";
-import {body} from "express-validator";
-
 
 import {postsService} from "../domain/posts-service";
-import {blogsService} from "../domain/blogs-service";
 import {commentService} from "../domain/comment-service";
 import {commentsQueryRepo} from "../repositories/comments-query-repository";
 
@@ -107,7 +104,7 @@ postsRouter.post('/:postId/comments',
         res.status(201).send(newComment)
     })
 
-// GET get all comments by post id
+// GET all comments by post id
 postsRouter.get('/:postId/comments',
     async (req: RequestWithParamsAndQuery<URIParamsPostModel, requestCommentsByPostIdQueryModel>, res: Response) => {
         const foundPost = await postsService.getPostByID(req.params.postId.toString())
